@@ -1,0 +1,51 @@
+version: '3'
+services:
+  omop:
+    image: postgres:13
+    container_name: omop
+    restart: always
+    environment:
+      POSTGRES_USER: omop
+      POSTGRES_PASSWORD: omop
+      POSTGRES_DB: omop
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/omop:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d
+    networks:
+      - omop-network  
+    # healthcheck:
+    #   test: ["CMD-SHELL", "pg_isready -U omop -d omop"]
+    #   start_period: 30s
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 5
+  
+  r:
+    build:
+      context: ./r
+      dockerfile: Dockerfile
+    container_name: r-base
+    #command: Rscript /scripts/conexion.R
+    command: R --vanilla
+    #restart: always
+    volumes:
+      - ./r-scripts:/scripts
+    depends_on:
+      - omop
+    healthcheck:
+      #test: ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"]
+      test: ["CMD-SHELL", "pg_isready -U omop -d omop || exit 1"]
+      #start_period: 30s
+      timeout: 10s
+      retries: 3  
+    networks:
+      - omop-network 
+
+networks:
+  omop-network:      
+
+volumes:
+  r-scripts:
