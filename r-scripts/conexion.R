@@ -6,7 +6,7 @@ db_host <- "omop"  # nombre del servicio de la base de datos en Docker Compose
 db_port <- 5432  # puerto de PostgreSQL
 db_name <- "omop"
 db_user <- "omop"
-db_password <- "ryc1852!"
+db_password <- "omop"
 
 # Establecer la conexión a la base de datos
 con <- dbConnect(

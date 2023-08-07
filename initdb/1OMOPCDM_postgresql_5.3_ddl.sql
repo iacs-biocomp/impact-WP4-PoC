@@ -2,6 +2,8 @@
 
 --Añadimos la creación del esquema OMOP
 
+CREATE SCHEMA results;
+
 CREATE SCHEMA omop;
 
 --HINT DISTRIBUTE ON KEY (person_id)
