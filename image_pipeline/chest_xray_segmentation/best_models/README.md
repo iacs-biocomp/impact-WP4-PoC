@@ -1,0 +1,1 @@
+Ubicar aquí el modelo necesario para realizar la segmentación
