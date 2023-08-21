@@ -1,1 +1,1 @@
-Ubicar aquí el modelo necesario para realizar la segmentación
+Ubicar aquí el modelo necesario para realizar la segmentación. Se debe descargar de la siguiente carpeta de B2DROP (accesible únicamente para participantes del proyecto): https://b2drop.bsc.es/index.php/f/2908191

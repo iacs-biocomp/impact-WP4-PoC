@@ -37,9 +37,7 @@ Por ejemplo un procedimiento con id 1234 y del paciente 9876 debería tener la s
 
 ## 1. Segmentación
 
-Este paso de la pipeline, generará una máscara de segmentación de los pulmones a partir de una imagen de entrada (.dcm), que deberá ser una
-RX de tórax en posición AnteroPosterior. Este código es una adaptación de uno desarrollado por Quibim ©.
-Para empezar, para ejecutar este paso de la pipeline habrá que construir la imagen (este paso no es necesario si ya se ha construido). Para ello habrá que ir hasta el directorio "chest_xray_segmentation" y desde la terminal ejecutar el siguiente comando:
+Este paso de la pipeline, generará una máscara de segmentación de los pulmones a partir de una imagen de entrada (.dcm), que deberá ser una RX de tórax en posición AnteroPosterior. Este código es una adaptación de uno desarrollado por Quibim ©. Antes de empezar, se deberá descargar el modelo necesario para realizar la segmentación que está ubicado en una carpeta del B2DROP disponible para los participantes del proyecto (https://b2drop.bsc.es/index.php/f/2908191) y ubicar el archivo descargado en la carpeta *image_pipeline/chest_xray_segmentation/best_models*. Una vez realizado este paso, habrá que construir la imagen (este paso no es necesario si ya se ha construido). Para ello habrá que ir hasta el directorio "chest_xray_segmentation" y desde la terminal ejecutar el siguiente comando:
 
 ```no-highlight
 $ docker build -t <nombre_de_la_imagen>:<tag> .
