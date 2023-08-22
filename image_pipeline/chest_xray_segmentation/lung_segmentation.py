@@ -303,6 +303,8 @@ for patient_folder in patient_folders:
         original_dcm_path = os.path.join(procedure_folder_path, "original")
         img_path = original_dcm_path
         mask_path = os.path.join(procedure_folder_path, "segmentation")
+
+        os.makedirs(mask_path, exist_ok=True)
         iterate_mask(img_path, mask_path)
     
 
