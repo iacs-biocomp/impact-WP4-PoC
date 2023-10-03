@@ -1,0 +1,34 @@
+archetype (adl_version=1.4)
+    CEN-EN13606-COMPOSITION.EstadodelpacienteeningresoporCOVID19paraevaluacionderiesgo.v1
+
+concept
+    [at0000]
+
+language
+    original_language = <[ISO_639-1::es]>
+
+description
+    original_author = <
+        ["date"] = <"2023-08-11">
+    >
+    lifecycle_state = <"Draft">
+    details = <
+        ["es"] = <
+            language = <[ISO_639-1::es]>
+        >
+    >
+
+definition
+    COMPOSITION[at0000] occurrences matches {1..1} matches {*}  -- EstadodelpacienteeningresoporCOVID-19paraevaluacionderiesgo
+
+ontology
+    term_definitions = <
+        ["es"] = <
+            items = <
+                ["at0000"] = <
+                    text = <"EstadodelpacienteeningresoporCOVID-19paraevaluacionderiesgo">
+                    description = <"EstadodelpacienteeningresoporCOVID-19paraevaluacionderiesgo">
+                >
+            >
+        >
+    >

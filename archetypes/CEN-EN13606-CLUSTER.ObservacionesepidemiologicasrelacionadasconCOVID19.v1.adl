@@ -1,0 +1,78 @@
+archetype (adl_version=1.4)
+    CEN-EN13606-CLUSTER.ObservacionesepidemiologicasrelacionadasconCOVID19.v1
+
+concept
+    [at0000]
+
+language
+    original_language = <[ISO_639-1::es]>
+
+description
+    original_author = <
+        ["date"] = <"2023-08-11">
+    >
+    lifecycle_state = <"Draft">
+    details = <
+        ["es"] = <
+            language = <[ISO_639-1::es]>
+        >
+    >
+
+definition
+    CLUSTER[at0000] occurrences matches {1..1} matches {  -- ObservacionesepidemiologicasrelacionadasconCOVID-19
+        parts existence matches {0..1} cardinality matches {0..*; unordered} matches {
+            ELEMENT[at0002] occurrences matches {0..*} matches {  -- Contacto con enfermo de infección respitatoria aguda
+                value existence matches {0..1} matches {
+                    CD[at0003] occurrences matches {0..1} matches {  -- Sí
+                        codeValue existence matches {0..1} matches {"63101000122104"}
+                        codingSchemeName matches {"PSY2001"}
+                        displayName matches {"Ha tenido contacto reciente con paciente con infección respiratoria aguda"}
+                    }
+                    CD[at0004] occurrences matches {0..1} matches {  -- No
+                        codeValue existence matches {0..1} matches {"63171000122108"}
+                        codingSchemeName matches {"SNOMED-CT"}
+                        displayName matches {"No ha tenido contacto reciente con paciente con infección respiratoria aguda"}
+                    }
+                }
+            }
+        }
+        structure_type existence matches {1..1} matches {
+            CS[at0001] occurrences matches {1..1} matches {  -- 
+                codeValue existence matches {0..1} matches {"STRC01"}
+                codingSchemeName existence matches {0..1} matches {"CEN/TC251/EN13606-3:STRUCTURE_TYPE"}
+            }
+        }
+    }
+
+ontology
+    terminologies_available = <"SNOMED-CT", ...>
+    term_definitions = <
+        ["es"] = <
+            items = <
+                ["at0000"] = <
+                    text = <"ObservacionesepidemiologicasrelacionadasconCOVID-19">
+                    description = <"ObservacionesepidemiologicasrelacionadasconCOVID-19">
+                >
+                ["at0002"] = <
+                    text = <"Contacto con enfermo de infección respitatoria aguda">
+                    description = <"Contacto con enfermo de infección respitatoria aguda">
+                >
+                ["at0003"] = <
+                    text = <"Sí">
+                    description = <"Ha tenido contacto reciente con paciente con infección respiratoria aguda	">
+                >
+                ["at0004"] = <
+                    text = <"No">
+                    description = <"No ha tenido contacto reciente con paciente con infección respiratoria aguda">
+                >
+            >
+        >
+    >
+    term_binding = <
+        ["SNOMED-CT"] = <
+            items = <
+                ["at0003"] = <[SNOMED-CT::63101000122104]>
+                ["at0004"] = <[SNOMED-CT::63171000122108]>
+            >
+        >
+    >

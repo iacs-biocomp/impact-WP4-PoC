@@ -1,0 +1,21 @@
+archetype
+    CEN-EN13606-CLUSTER.ObservacionesepidemiologicasrelacionadasconCOVID19.v1
+
+description
+    original_author = <
+        ["date"] = <"2023-08-11">
+    >
+    lifecycle_state = <"Draft">
+    details = <
+        ["es"] = <
+            language = <[ISO_639-1::es]>
+        >
+    >
+
+objectBuilder
+    object_builder_definition = <"<?xml version='1.0' encoding='UTF-8'?><objectBuilder hasBagSemantics='false'><sourcePaths><sourcePath>/source[anySource]/type[XML]/document[anyDocument]/element[linkEHRvirtualIDPatient]</sourcePath></sourcePaths></objectBuilder>">
+mapping
+    map_definitions = <
+    >
+
+

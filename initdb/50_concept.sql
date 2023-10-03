@@ -644,7 +644,26 @@ INSERT INTO concept (concept_id,concept_name,domain_id,vocabulary_id,concept_cla
 	 (47,'Condition/Measurement','Metadata','Domain','Domain',NULL,'OMOP generated','1970-01-01','2099-12-31',NULL),
 	 (45754875,'5-digit billing V code','Metadata','Concept Class','Concept Class',NULL,'OMOP generated','1970-01-01','2099-12-31',NULL),
 	 (44819021,'Qualifier Value','Metadata','Concept Class','Concept Class',NULL,'OMOP generated','1970-01-01','2099-12-31',NULL);
-
+INSERT INTO concept (concept_id,concept_name,domain_id,vocabulary_id,concept_class_id,standard_concept,concept_code,valid_start_date,valid_end_date,invalid_reason) VALUES
+	 (0,'No matching concept','Metadata','None','Undefined',NULL,'No matching concept','1970-01-01','2099-12-31',NULL),
+	 (1,'Domain','Metadata','Domain','Domain',NULL,'OMOP generated','1970-01-01','2099-12-31',NULL),
+	 (5,'Observation period type','Metadata','Domain','Domain',NULL,'OMOP generated','1970-01-01','2015-10-15','U'),
+	 (6,'Death type','Metadata','Domain','Domain',NULL,'OMOP generated','1970-01-01','2015-10-15','U'),
+	 (9,'Visit type','Metadata','Domain','Domain',NULL,'OMOP generated','1970-01-01','2015-10-15','U');
+INSERT INTO concept (concept_id,concept_name,domain_id,vocabulary_id,concept_class_id,standard_concept,concept_code,valid_start_date,valid_end_date,invalid_reason) VALUES
+	 (11,'Procedure type','Metadata','Domain','Domain',NULL,'OMOP generated','1970-01-01','2015-10-15','U'),
+	 (14,'Drug type','Metadata','Domain','Domain',NULL,'OMOP generated','1970-01-01','2015-10-15','U'),
+	 (18,'Device type','Metadata','Domain','Domain',NULL,'OMOP generated','1970-01-01','2015-10-15','U');
+INSERT INTO concept (concept_id,concept_name,domain_id,vocabulary_id,concept_class_id,standard_concept,concept_code,valid_start_date,valid_end_date,invalid_reason) VALUES
+	 (20,'Condition type','Metadata','Domain','Domain',NULL,'OMOP generated','1970-01-01','2015-10-15','U'),
+	 (22,'Measurement type','Metadata','Domain','Domain',NULL,'OMOP generated','1970-01-01','2015-10-15','U'),
+	 (26,'Note Type','Metadata','Domain','Domain',NULL,'OMOP generated','1970-01-01','2015-10-15','U'),
+	 (28,'Observation type','Metadata','Domain','Domain',NULL,'OMOP generated','1970-01-01','2015-10-15','U'),
+	 (37,'Specimen type','Metadata','Domain','Domain',NULL,'OMOP generated','1970-01-01','2015-10-15','U');
+INSERT INTO concept (concept_id,concept_name,domain_id,vocabulary_id,concept_class_id,standard_concept,concept_code,valid_start_date,valid_end_date,invalid_reason) VALUES
+	 (55,'Provider','Metadata','Domain','Domain',NULL,'OMOP generated','1970-01-01','2019-10-02','D'),
+	 (56,'Person','Metadata','Domain','Domain',NULL,'OMOP generated','1970-01-01','2022-09-27','D'),
+	 (57,'Care site','Metadata','Domain','Domain',NULL,'OMOP generated','1970-01-01','2022-09-27','D');
 
 -- ---------------
 -- Impact data PoC
