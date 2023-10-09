@@ -1,0 +1,153 @@
+archetype (adl_version=1.4)
+    CEN-EN13606-COMPOSITION.EpisodiodehospitalizacionporCOVID19.v1
+
+concept
+    [at0000]
+
+language
+    original_language = <[ISO_639-1::es]>
+
+description
+    original_author = <
+        ["date"] = <"2023-08-11">
+    >
+    lifecycle_state = <"Draft">
+    details = <
+        ["es"] = <
+            language = <[ISO_639-1::es]>
+        >
+    >
+
+definition
+    COMPOSITION[at0000] occurrences matches {1..1} matches {  -- Episodio de hospitalizacion por COVID-19
+        content existence matches {0..1} cardinality matches {0..*; unordered} matches {
+            SECTION[at0001] occurrences matches {0..*} matches {  -- Observaciones epidemiológicas
+                members existence matches {0..1} cardinality matches {0..*; unordered; unique} matches {*}
+            }
+            SECTION[at0002] occurrences matches {0..1} matches {  -- Síntomas
+                members existence matches {0..1} cardinality matches {0..*; unordered; unique} matches {
+                    ENTRY[at0006] occurrences matches {0..1} matches {  -- Síntomas
+                        items existence matches {0..1} cardinality matches {0..*; unordered; unique} matches {
+                            ELEMENT[at0007] occurrences matches {0..*} matches {  -- Sintoma identificado
+                                value existence matches {0..1} matches {
+                                    CD[at0008] occurrences matches {0..1} matches {  -- Código
+                                        codeValue existence matches {0..1} matches {"267036007","4386001","248596009","422400008","62315008","386661006","49727002","68962001","247318005","44169009","30233002","64531003","29857009","3006004","91175000","367391008","193894004","233604007","162397003","43724002","67782005","14669001"}
+                                        codingSchemeName matches {"SNOMED-CT"}
+                                        displayName matches {"Síntoma identificado"}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            SECTION[at0003] occurrences matches {0..*} matches {  -- Observaciones clínicas
+                members existence matches {0..1} cardinality matches {0..*; unordered; unique} matches {
+                    ENTRY[at0009] occurrences matches {0..*} matches {  -- Antropometría
+                        items existence matches {0..1} cardinality matches {0..*; unordered; unique} matches {
+                            ELEMENT[at0010] occurrences matches {0..*} matches {  -- Peso
+                                value existence matches {0..1} matches {
+                                    REAL[at0011] occurrences matches {0..1} matches {  -- Peso
+                                        value existence matches {1..1} matches {*}
+                                    }
+                                }
+                            }
+                            ELEMENT[at0012] occurrences matches {0..*} matches {  -- Talla
+                                value existence matches {0..1} matches {
+                                    REAL[at0013] occurrences matches {0..1} matches {  -- Talla
+                                        value existence matches {1..1} matches {*}
+                                    }
+                                }
+                            }
+                            ELEMENT[at0014] occurrences matches {0..*} matches {  -- IMC
+                                value existence matches {0..1} matches {
+                                    REAL[at0015] occurrences matches {0..1} matches {  -- IMC
+                                        value existence matches {1..1} matches {*}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            SECTION[at0004] occurrences matches {0..*} matches {  -- Observaciones de laboratorio
+                members existence matches {0..1} cardinality matches {0..*; unordered; unique} matches {*}
+            }
+            SECTION[at0005] occurrences matches {0..*} matches {  -- Tratamiento
+                members existence matches {0..1} cardinality matches {0..*; unordered; unique} matches {*}
+            }
+        }
+    }
+
+ontology
+    term_definitions = <
+        ["es"] = <
+            items = <
+                ["at0000"] = <
+                    text = <"Episodio de hospitalizacion por COVID-19">
+                    description = <"Episodio de hospitalizacion por COVID-19">
+                >
+                ["at0002"] = <
+                    text = <"Síntomas">
+                    description = <"">
+                >
+                ["at0001"] = <
+                    text = <"Observaciones epidemiológicas">
+                    description = <"">
+                >
+                ["at0003"] = <
+                    text = <"Observaciones clínicas">
+                    description = <"">
+                >
+                ["at0004"] = <
+                    text = <"Observaciones de laboratorio">
+                    description = <"">
+                >
+                ["at0005"] = <
+                    text = <"Tratamiento">
+                    description = <"">
+                >
+                ["at0006"] = <
+                    text = <"Síntomas">
+                    description = <"Síntomas encontrados en el paciente en el momento del ingreso">
+                >
+                ["at0007"] = <
+                    text = <"Sintoma identificado">
+                    description = <"Sintoma identificado">
+                >
+                ["at0008"] = <
+                    text = <"Código">
+                    description = <"Código SNOMED del síntoma identificado">
+                >
+                ["at0009"] = <
+                    text = <"Antropometría">
+                    description = <"">
+                >
+                ["at0010"] = <
+                    text = <"Peso">
+                    description = <"">
+                >
+                ["at0011"] = <
+                    text = <"Peso">
+                    description = <"Pero en Kg">
+                >
+                ["at0012"] = <
+                    text = <"Talla">
+                    description = <"">
+                >
+                ["at0013"] = <
+                    text = <"Talla">
+                    description = <"Talla en centímetros">
+                >
+                ["at0014"] = <
+                    text = <"IMC">
+                    description = <"">
+                >
+                ["at0015"] = <
+                    text = <"IMC">
+                    description = <"Indice de Masa Corporal
+">
+                >
+            >
+        >
+    >

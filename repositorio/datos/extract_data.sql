@@ -1,0 +1,11 @@
+copy omop.location to '/data/location.csv' with delimiter ';' csv header;
+copy omop.care_site to '/data/care_site.csv' with delimiter ';' csv header;
+copy omop.provider to '/data/provider.csv' with delimiter ';' csv header;
+copy omop.person to '/data/person.csv' with delimiter ';' csv header;
+copy omop.death to '/data/death.csv' with delimiter ';' csv header;
+copy omop.visit_occurrence to '/data/visit_occurrence.csv' with delimiter ';' csv header;
+copy omop.condition_occurrence to '/data/condition_occurrence.csv' with delimiter ';' csv header;
+copy omop.drug_exposure to '/data/drug_exposure.csv' with delimiter ';' csv header;
+copy omop.procedure_occurrence to '/data/procedure_occurrence.csv' with delimiter ';' csv header;
+copy omop.measurement to '/data/measurement.csv' with delimiter ';' csv header;
+copy omop.observation to '/data/observation.csv' with delimiter ';' csv header;

@@ -14,17 +14,26 @@ imaging_occurrence_id = -1
 
 patient_folders = [folder for folder in os.listdir(input_folder) if os.path.isdir(os.path.join(input_folder, folder))]
 
+print("Patient folders: ")
+print(patient_folders)
+
 for patient_folder in patient_folders:
     patient_folder_path = os.path.join(input_folder, patient_folder)
+    print("Patient folder " + patient_folder_path)
     person_id = int(patient_folder)
 
     procedure_folders = [folder for folder in os.listdir(patient_folder_path) if os.path.isdir(os.path.join(patient_folder_path, folder))]
+
+    print(imaging_occurrence_id)
+
     if imaging_occurrence_id != -1:
         imaging_occurrence_id_start = imaging_occurrence_id + 1
     
     for index, procedure_folder in enumerate(procedure_folders, start=1):
         imaging_occurrence_id = imaging_occurrence_id_start + index - 1
         procedure_folder_path = os.path.join(patient_folder_path, procedure_folder)
+
+        print ("datos:" + str(imaging_occurrence_id) + ":" + procedure_folder + ":" + procedure_folder_path)
         procedure_occurrence_id = int(procedure_folder)
 
         wadors_uri = os.path.join(procedure_folder_path, "original")

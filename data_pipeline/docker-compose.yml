@@ -14,6 +14,7 @@ services:
     volumes:
       - ./data/omop:/var/lib/postgresql/data
       - ./initdb:/docker-entrypoint-initdb.d
+      - ../repositorio/datos:/data
     networks:
       - omop-network  
     # healthcheck:

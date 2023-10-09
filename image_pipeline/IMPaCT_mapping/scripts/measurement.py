@@ -1,6 +1,7 @@
 import csv
 import os
 import pandas as pd
+import numpy as np
 import pytz
 import json
 from datetime import datetime, timedelta
@@ -28,6 +29,7 @@ for patient_folder in patient_folders:
         measurement_datetime = measurement_datetime.astimezone(pytz.utc)
         measurement_date = measurement_datetime.date()
         measurement_datetime_str = measurement_datetime.strftime("%Y-%m-%d %H:%M:%S")
+        measurement_time_str = measurement_datetime.strftime("%H:%M:%S")
 
         measurement_ids=[]
         img_feature_file = os.path.join(procedure_folder_path, "omop_tables", "imaging_feature.csv")
@@ -48,7 +50,8 @@ for patient_folder in patient_folders:
         df_rad = pd.read_csv(rad_output_file)
         df_dcm_headers = pd.read_csv(dcm_headers_output_file)
         df_features = pd.concat([df_rad, df_dcm_headers], ignore_index=True)
-             
+        df_features = df_features.replace({np.nan:None})
+
         for i, row in df_features.iterrows():
             measurement_id = measurement_ids[i]
             measurement_source_value = row['feature']
@@ -64,9 +67,9 @@ for patient_folder in patient_folders:
                 'measurement_concept_id': int(measurement_concept_id),
                 'measurement_date': measurement_date,
                 'measurement_datetime': measurement_datetime_str,
-                'measurement_time': measurement_datetime_str,
+                'measurement_time': measurement_time_str,
                 'measurement_type_concept_id': measurement_type_concept_id, 
-                'operator_concept_id': int('276136004'),  #'=' code
+                'operator_concept_id': int('4172703'),  #'=' code  276136004 (SNOMED), 4172703 (OMOP concept_id)
                 'value_as_number': value_as_number,
                 'value_as_concept': value_as_concept,
                 'unit_concept_id': '',
@@ -76,12 +79,12 @@ for patient_folder in patient_folders:
                 'visit_occurrence_id': '',
                 'visit_detail_id': '',
                 'measurement_source_value': measurement_source_value,
-                'measurement_source_concept_id': measurement_source_concept_id,
+                'measurement_source_concept_id': 0, # habría que obtener el concept_id para cada source code 
                 'unit_source_value': '',
-                'unit_source_concept_id': '',
+                #'unit_source_concept_id': '',
                 'value_source_value': '',
-                'measurement_event_id': '',
-                'meas_event_field_concept_id': ''
+                #'measurement_event_id': '',
+                #'meas_event_field_concept_id': ''
             }
             rows.append(row_data)
 
@@ -90,7 +93,6 @@ for patient_folder in patient_folders:
 
         csv_file = os.path.join(omop_tables_folder, "measurement.csv")
         fieldnames = rows[0].keys()
-
         with open(csv_file, mode='w', newline='') as file:
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             writer.writeheader()
