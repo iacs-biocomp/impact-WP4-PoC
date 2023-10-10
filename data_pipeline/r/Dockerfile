@@ -1,5 +1,5 @@
 # Utilizar la imagen base de R
-FROM r-base:latest
+FROM r-base:4.3.1
 
 # Instalar las dependencias necesarias para RPostgreSQL
 RUN apt-get update && apt-get install -y libpq-dev
