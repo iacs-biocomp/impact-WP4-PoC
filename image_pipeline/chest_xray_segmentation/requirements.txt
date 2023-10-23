@@ -71,3 +71,4 @@ wcwidth==0.1.8
 werkzeug==0.16.1
 wheel==0.34.1
 wrapt==1.11.2
+SimpleITK

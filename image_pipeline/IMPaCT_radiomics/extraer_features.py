@@ -7,6 +7,7 @@ import json
 import radiomics
 import nrrd
 import pydicom
+import datetime
 
 from radiomics import featureextractor
 
@@ -16,10 +17,18 @@ exteractor = featureextractor.RadiomicsFeatureExtractor(geometryTolerance=1.0)
 
 def extraer_tag(dcm, tag):
     # Check if the tag exists
-    try:
-        outcome = dcm.get(tag).value
-    except:
-        outcome = ""
+    compare_tag = " ".join(map(str, tag))
+    tag_date="8 33"
+    if compare_tag == tag_date:  
+        try:
+            outcome = dcm.get(tag).value
+        except:
+            outcome = datetime.date.today()
+    else:
+        try:
+            outcome = dcm.get(tag).value
+        except:
+            outcome = 0
     return outcome
 
 list_patients = os.listdir(patients_path)

@@ -3,7 +3,7 @@ import json
 import cv2
 import numpy as np
 import os
-
+import io
 # Import custom libraries
 import models.neural_networks as net
 import load_data as load
@@ -13,6 +13,8 @@ from models.Mask_RCNN import model as modellib
 import nibabel as nib
 import pydicom
 import nrrd
+import matplotlib.pyplot as plt
+import SimpleITK as sitk
 
 def remove_noisy_labels(mask):
 
@@ -223,46 +225,36 @@ def lung_segmentation(img, model):
 
     return mask_res
 
-
-if __name__ == "__main__":
-
-    import time
-
-
-    # def find_dcm(path):
-    #     files = os.listdir(path)
-    #     for f in range(len(files)):
-    #         if '.dcm' in files[f]:
-    #             return files[f]
-
-
-    def normalnorm(slice):
-
-        maxim = np.max(slice)
-        minim = np.min(slice)
-        sliced = (slice - minim) / (maxim - minim)
-        return sliced
-
-
 def iterate_mask(img_path, mask_path):
-        patients = os.listdir(img_path)
+        #patients = os.listdir(img_path)
         print('Creating training data')
         feature_list = []
         model_path = Path(__file__).parent / "best_models" / "mrcnn_lungs_exp20_0250.h5"
         model = get_model(str(model_path))
-        files = os.listdir(img_path)
-        print (files)
+        # files = os.listdir(img_path)
+        files = img_path
         for i in range(len(files)):
-            filename = img_path  + '/' + files[i]
-            # filename_mask = find_dcm(filename)
-            # dss = pydicom.dcmread(filename + filename_mask, force=True)
-            dss = pydicom.dcmread(filename, force=True)
-            dss.file_meta.TransferSyntaxUID = pydicom.uid.ImplicitVRLittleEndian  # or whatever is the correct transfer syntax for the file
+            #filename_mask = find_dcm(filename)
+            # get the path of the folder "original" inside files[i]
+            filename = os.path.join(files[i], os.listdir(files[i])[0])
+        # dss = pydicom.dcmread(filename + filename_mask, force=True)
+           # dss = pydicom.dcmread(filename, force=True)
+        # Intenta leer el pixel array usando SimpleITK
+            print(filename)
+            try:
+                data = sitk.GetArrayFromImage(sitk.ReadImage(filename))
+            except Exception as e:
+                print(f"Error al leer el pixel array: {e}")
+                data = None
 
-            data = dss.pixel_array
+            #data = dss.pixel_array
+
+            #convertir a 2D si es 3D
+            if len(data.shape) == 3:
+                data = data[0]
             original_shape = data.shape
-
-            data = (normalnorm(data)) * 255
+            print(data.shape)
+            #data = (normalnorm(data)) * 255
             data = data.astype('uint8')
 
             rgb = cv2.cvtColor(data, cv2.COLOR_GRAY2BGR)
@@ -278,33 +270,39 @@ def iterate_mask(img_path, mask_path):
             mask = np.fliplr(mask)
             mask = cv2.resize(mask, original_shape, interpolation=cv2.INTER_CUBIC)
 
-            filename_ = mask_path + '/lungmask.nrrd'
+            filename_ = mask_path[i] + '/lungmask.nrrd'
             nrrd.write(filename_, mask)
 
 
 
-# Volúmenes docker
+    # Volúmenes docker
 input_folder = '/input'
 
-# Obtener la lista de carpetas de pacientes dentro del directorio general
+    # Obtener la lista de carpetas de pacientes dentro del directorio general
 patient_folders = [folder for folder in os.listdir(input_folder) if os.path.isdir(os.path.join(input_folder, folder))]
-
-# Iterar sobre las carpetas de pacientes
+array_images = []
+array_masks = []
 for patient_folder in patient_folders:
     patient_folder_path = os.path.join(input_folder, patient_folder)
-
-    # Obtener la lista de carpetas de procedimientos para el paciente actual
-    procedure_folders = [folder for folder in os.listdir(patient_folder_path) if os.path.isdir(os.path.join(patient_folder_path, folder))]
-
-    # Iterar sobre las carpetas de procedimientos
-    for index, procedure_folder in enumerate(procedure_folders, start=1):
-        procedure_folder_path = os.path.join(patient_folder_path, procedure_folder)
+    procedure_folder = os.listdir(patient_folder_path)[0]
+    img_paths = os.path.join(patient_folder_path, procedure_folder, "original")
+    array_images.append(img_paths)
+    mask_paths = os.path.join(patient_folder_path, procedure_folder, "segmentation")
+    os.makedirs(mask_paths, exist_ok=True)
+    array_masks.append(mask_paths)
+    # # Obtener la lista de carpetas de procedimientos para el paciente actual
+    # procedure_folders = [folder for folder in os.listdir(patient_folder_path) if os.path.isdir(os.path.join(patient_folder_path, folder))]
+    # # Iterar sobre las carpetas de procedimientos
+    # for index, procedure_folder in enumerate(procedure_folders, start=1):
+    #     procedure_folder_path = os.path.join(patient_folder_path, procedure_folder)
         
-        original_dcm_path = os.path.join(procedure_folder_path, "original")
-        img_path = original_dcm_path
-        mask_path = os.path.join(procedure_folder_path, "segmentation")
-
-        os.makedirs(mask_path, exist_ok=True)
-        iterate_mask(img_path, mask_path)
-    
-
+    #     original_dcm_path = os.path.join(procedure_folder_path, "original")
+    #     img_path = original_dcm_path
+    #     mask_path = os.path.join(procedure_folder_path, "segmentation")
+    #     if not os.path.exists(mask_path):
+    #         os.makedirs(mask_path, exist_ok=True)
+    #         #print(f'carpeta {patient_folder} creada')
+    #         print(f'Carpeta mask creada')
+    #     iterate_mask(img_path, mask_path)
+    #     print(f'Segmentado el paciente {patient_folder}, y su procedure {procedure_folder}')
+iterate_mask(array_images, array_masks)

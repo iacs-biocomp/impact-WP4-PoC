@@ -1,0 +1,16 @@
+# Elegir la imagen base
+FROM python:3.6
+
+ENV http_proxy="http://roxy.san.gva.es:8080" 
+ENV https_proxy="http://roxy.san.gva.es:8080" ENV no_proxy="127.0.0.1,localhost,10.193.103.64" ENV 
+ftp_proxy="http://proxy.san.gva.es:8080" ENV no_proxy="127.0.0.1,localhost"# Establecer el directorio de trabajo dentro del contenedor WORKDIR /module ENV 
+HTTP_PROXY="http://proxy.san.gva.es:8080" ENV HTTPS_PROXY="http://proxy.san.gva.es:8080"# Copiar los archivos de dependencias COPY requirements.txt .
+ENV FTP_PROXY="http://proxy.san.gva.es:8080"
+# Instalar las dependencias del proyecto
+RUN pip install -r requirements.txt
+
+# Copiar el contenido del directorio chest_xray_segmentation al contenedor
+COPY . /scripts
+
+# Ejecutar el script de segmentacion
+ENTRYPOINT ["python", "/scripts/lung_segmentation.py"]
