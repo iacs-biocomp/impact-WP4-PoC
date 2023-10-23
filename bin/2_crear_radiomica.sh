@@ -13,7 +13,7 @@ cd "$IMAGE_PIPELINE/IMPaCT_radiomics"
 echo "$PWD"
 
 echo "Construyendo imagen docker del extractor de radiómica"
-#docker build -t impact-wp4-poc/radiomics:0.1 .
+docker build -t impact-wp4-poc/radiomics:0.1 .
 
 
 docker run --rm  -v "${IMAGE_REPO}":/input impact-wp4-poc/radiomics:0.1
