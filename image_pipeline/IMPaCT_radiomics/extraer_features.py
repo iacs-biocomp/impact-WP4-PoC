@@ -67,7 +67,11 @@ for patient in list_patients:
         image_size = image.GetSize()
         # add a 3rd dimension to the mask with value 1
         mask = sitk.JoinSeries(mask)
-        result = exteractor.execute(image, mask)
+        try:
+            result = exteractor.execute(image, mask)
+        except Exception as e:
+            print("Error {} extrayendo features de imagen {}".format(e,radiomics_path))
+
         # Save the results that starts with "original_" in a dataframe
         df = pd.DataFrame.from_dict({k: v for k, v in result.items() if k.startswith("original_")}, orient="index")
         # Transpose the dataframe to have the features as columns

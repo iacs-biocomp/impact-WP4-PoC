@@ -9,13 +9,13 @@ echo "Image repository: $IMAGE_REPO"
 IMAGE_PIPELINE="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../image_pipeline" &> /dev/null && pwd )"
 echo "Image pipeline sources: $IMAGE_PIPELINE"
 
-cd "$IMAGE_PIPELINE/IMPaCT_mapping"
+cd "$IMAGE_PIPELINE/IMPaCT_radiomics"
 echo "$PWD"
 
 if [ $# -gt 0 ] && [ $1 = "-create" ] 
 then
-    echo "Construyendo imagen docker del generador de tablas OMOP"
-    docker build -t impact-wp4-poc/metadata:0.1 .
+    echo "Construyendo imagen docker del extractor de radiómica"
+    docker build -t impact-wp4-poc/radiomics:0.1 .
 fi
 
-docker run --rm  -v "${IMAGE_REPO}":/input -v "${IMAGE_PIPELINE}/IMPaCT_mapping/config":/config impact-wp4-poc/metadata:0.1
+docker run --rm  -v "${IMAGE_REPO}":/input impact-wp4-poc/radiomics:0.1
