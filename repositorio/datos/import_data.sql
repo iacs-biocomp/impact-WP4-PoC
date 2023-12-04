@@ -5,7 +5,7 @@ copy omop.person from '/data/person.csv' with delimiter ';' csv header;
 copy omop.death from '/data/death.csv' with delimiter ';' csv header;
 copy omop.visit_occurrence from '/data/visit_occurrence.csv' with delimiter ';' csv header;
 copy omop.condition_occurrence from '/data/condition_occurrence.csv' with delimiter ';' csv header;
-copy omop.drug_exposure from 'data/drug_exposure.csv' with delimiter ';' csv header;
+copy omop.drug_exposure from '/data/drug_exposure.csv' with delimiter ';' csv header;
 copy omop.procedure_occurrence from '/data/procedure_occurrence.csv' with delimiter ';' csv header;
 copy omop.measurement from '/data/measurement.csv' with delimiter ';' csv header;
 copy omop.observation from  '/data/observation.csv' with delimiter ';' csv header;
