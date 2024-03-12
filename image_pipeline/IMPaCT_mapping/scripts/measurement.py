@@ -71,7 +71,7 @@ for patient_folder in patient_folders:
                 'measurement_type_concept_id': measurement_type_concept_id, 
                 'operator_concept_id': int('4172703'),  #'=' code  276136004 (SNOMED), 4172703 (OMOP concept_id)
                 'value_as_number': value_as_number,
-                'value_as_concept': value_as_concept,
+                'value_as_concept': int(value_as_concept or 0),
                 'unit_concept_id': '',
                 'range_low': '',
                 'range_high': '',
