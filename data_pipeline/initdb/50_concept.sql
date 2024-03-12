@@ -135,5 +135,5 @@ INSERT INTO concept (concept_id,concept_name,domain_id,vocabulary_id,concept_cla
  (2000000512,'Vivo recuperado','Observation','SNOMED-SARS-CoV2','Clinical Finding','','63471000122104','2023-06-19','2099-12-31',NULL),
  (2000000513,'Muerte por COVID-19','Observation','SNOMED-SARS-CoV2','Clinical Finding','','63481000122101','2023-06-19','2099-12-31',NULL),
  (2000000514,'Todavía en seguimiento','Observation','SNOMED-SARS-CoV2','Clinical Finding','','63511000122107','2023-06-19','2099-12-31',NULL),
- (2000000515,'Tipo de Soporte Respiratorio','Procedure','SNOMED-SARS-CoV2','Clinical Observation','','63341000122104','2023-06-19','2099-12-31',NULL)
+ (2000000515,'Tipo de Soporte Respiratorio','Procedure','SNOMED-SARS-CoV2','Clinical Observation','','63341000122104','2023-06-19','2099-12-31',NULL),
 (38003851,'Family Medicine','Provider','NUCC','Physician Specialty','S','207Q00000X','1970-01-01','2099-12-31',NULL);
