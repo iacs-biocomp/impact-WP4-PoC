@@ -10,3 +10,4 @@ DOCKER_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../data_pipeline" &> /dev/nu
 echo "Docker dir: $DOCKER_DIR"
 
 docker compose -f "${DOCKER_DIR}/docker-compose.yml" exec -it omop psql -U omop -d omop -f /data/import_data.sql
+docker compose -f "${DOCKER_DIR}/docker-compose.yml" exec -it omop psql -U omop -d omop -f /data/cdm_source.sql

@@ -9,3 +9,4 @@ echo "Docker repository: $docker_dir"
 cd $script_dir 
 
 docker compose -f "$docker_dir/docker-compose.yml" exec -it omop psql -U omop -d omop -f /data/import_data.sql
+docker compose -f "$docker_dir/docker-compose.yml" exec -it omop psql -U omop -d omop -f /data/cdm_source.sql

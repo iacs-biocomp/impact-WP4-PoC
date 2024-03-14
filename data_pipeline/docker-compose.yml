@@ -1,6 +1,6 @@
-version: '3'
+﻿version: '3'
 services:
-  omop:
+  omop-postgres:
     image: postgres:13
     container_name: omop
     restart: always
@@ -24,26 +24,26 @@ services:
     #   timeout: 5s
     #   retries: 5
   
-#  r:
-#    build:
-#      context: ./r
-#      dockerfile: Dockerfile
-#    container_name: r-base
-#    #command: Rscript /scripts/conexion.R
-#    command: R --vanilla
-#    #restart: always
-#    volumes:
-#      - ./r-scripts:/scripts
-#    depends_on:
-#      - omop
-#    healthcheck:
-#      #test: ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"]
-#      test: ["CMD-SHELL", "pg_isready -U omop -d omop || exit 1"]
-#      #start_period: 30s
-#      timeout: 10s
-#      retries: 3  
-#    networks:
-#      - omop-network 
+  r:
+   build:
+     context: ./r
+     dockerfile: Dockerfile
+   container_name: r-base
+   command: Rscript /scripts/execute.R
+   #command: R --vanilla
+   #restart: always
+   volumes:
+     - ./r-scripts:/scripts
+   depends_on:
+      - omop-postgres
+   healthcheck:
+     #test: ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"]
+     test: ["CMD-SHELL", "pg_isready -U omop -d omop || exit 1"]
+     start_period: 30s
+     timeout: 10s
+     retries: 3  
+   networks:
+      - omop-network 
 
 networks:
   omop-network:      
