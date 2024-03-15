@@ -2,7 +2,6 @@
 library(DBI)
 library(RPostgreSQL)
 library(Achilles)
-print(packageVersion("textshaping"))
 library(CdmInspection)
 library(CatalogueExport.bigan)
 
@@ -10,7 +9,7 @@ library(CatalogueExport.bigan)
 # Configuración de la conexión a la base de datos
 db_host <- "omop-postgres" # nombre del servicio de la base de datos en Docker Compose
 db_port <- 5432  # puerto de PostgreSQL
-db_name <- "omop"
+db_name <- "omop" # nombre del esquema
 db_user <- "omop"
 db_password <- "omop"
 db_server <- paste(db_host, "/", db_name, sep = "")
@@ -26,13 +25,13 @@ cdmSchema <- "omop"
 resultsSchema <- "results"
 vocabSchema <- cdmSchema
 sourceName <- "BIGAN"
-version <- 5.3
+version <- 5.3 # Versión CDM
 
 # ACHILLES
 # Definimos los análisis
 print("ACHILLES")
 allAnalyses=getAnalysisDetails()$ANALYSIS_ID
-longAnalyses1=c(226,1824,413,424) # Análisis excluidos
+longAnalyses1=c(226,1824,413,424) # Posibles análisis problemáticos
 subSet1=setdiff(allAnalyses,longAnalyses1)
 
 # Ejecutamos Achilles
@@ -58,7 +57,7 @@ Sys.setenv("R_REMOTES_NO_ERRORS_FROM_WARNINGS" = TRUE)
 # All results smaller than this value are removed from the results.
 smallCellCount <- 2
 verboseMode <- TRUE
-outputFolder <- "/scripts/CdmInspection"
+outputFolder <- "/scripts/envio/" # Folder destino
 results<-cdmInspection(
   connectionDetails = connectionDetails,
   cdmDatabaseSchema = cdmSchema,
@@ -95,4 +94,4 @@ catalogueExport(connectionDetails = connectionDetails,
          vocabDatabaseSchema = cdmSchema,
          sourceName = sourceName,
          cdmVersion = version,
-         outputFolder = "/scripts/")
+         outputFolder = outputFolder)
