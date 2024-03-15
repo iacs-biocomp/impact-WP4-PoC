@@ -1,21 +1,20 @@
-Installation
+**Update 15-03**
 
-OS X & Linux:
+- Se ha añadido el archivo cdm_source.sql, este realiza una inserción en la tabla cdm_source del esquema OMOP la cual indica la versión y datos generales del CDM. Modificar dicho archivo con los datos correspondientes
+- Se ha modificado el 0_cargar_datos añadiendo la ejecución de este .sql
+> [!NOTE]
+> Si ya se tiene poblada la BBDD hay que ejecutar únicamente el comando sobre el contenedor de omop
+>
+> docker exec -it omop psql -U omop -d omop -f /data/cdm_source.sql
 
-npm install my-crazy-module --save
+- En r-scripts se ha creado un archivo denominado execute.R, este se encarga de ejecutar tanto Achilles, como CDMInspection, como CatalogueExport
+- El Dockerfile de R contiene ahora la instalación de nuevos paquetes y librerías. Asimismo, se ha actualizado el sources.list
+- El docker-compose levanta sendos contenedores y lanza el execute.R
+> [!TIP]
+> Si se quiere visualizar la ejecución del archivo interior
+> 
+> docker logs r-base
+- Por último, en la carpeta r-scripts/envio se generan los archivos de interés.
 
-Windows:
 
-edit autoexec.bat
 
-Usage example
-
-A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
-
-For more examples and usage, please refer to the Wiki.
-Development setup
-
-Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
-
-make install
-npm test
