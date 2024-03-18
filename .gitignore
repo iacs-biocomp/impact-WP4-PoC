@@ -2,3 +2,5 @@
 /image_pipeline/chest_xray_segmentation/best_models/mrcnn_lungs_exp20_0250.h5
 /repositorio/datos_test/
 /repositorio/imagen/
+/data_pipeline/data/
+/datos_test/
